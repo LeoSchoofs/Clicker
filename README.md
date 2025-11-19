@@ -1,0 +1,2 @@
+# Clicker
+A clicker game
