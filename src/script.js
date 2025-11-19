@@ -28,7 +28,7 @@ function bitsPerSecond() {
     return bps;
 }
 
-function click(e) {
+function clickPC(e) {
     gameData.score += gameData.clickValue;
     
     createParticle(e.clientX, e.clientY, "+" + gameData.clickValue);
@@ -68,7 +68,7 @@ function updateUI() {
     gameData.items.forEach((item, index) => {
         const btn = document.getElementById(`btn-item-${index}`);
         if (btn) {
-            if (gameData.bps < item.cost) {
+            if (gameData.score < item.cost) {
                 btn.classList.add('disabled');
             } else {
                 btn.classList.remove('disabled');
