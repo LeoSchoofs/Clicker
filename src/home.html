@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>A clicker game</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1>Mon Clicker</h1>
-        
-        <div id="score">0</div>
-        <p id="passiveProduction"></p>
+<head>
+    <title>A clicker game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-        <button id="click-button" class="img-button"><img draggable="false" src="img/VintagePc.png"></button>
+<div class="game-container">
+    <div class="click-section">
+        <div class="score-display"><span id="score">0</span> BITS</div>
+        <div class="per-second">Score: <span id="fps">0</span> BITS/sec</div>
 
-        <br\>
-        
-        <script src="script.js"></script>
-    </body>
+        <div id="pc-button" onclick="clickPC(event)"></div>
+
+    </div>
+
+    <div class="upgrade-section">
+        <div class="section-title">Améliorations & Production passive</div>
+
+        <div id="upgrades-container"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
 </html>
