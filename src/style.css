@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+    background: #f6f6f6;
+}
+
+#score {
+    font-size: 48px;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+#click-button {
+    font-size: 24px;
+    padding: 15px 30px;
+    cursor: pointer;
+}
+
+
+.img-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.img-button img {
+    width: 150px;
+    transition: transform 0.1s;
+}
+
+.img-button img:active {
+    transform: scale(0.95);
+}
