@@ -1,34 +1,150 @@
+:root {
+    --bg-color: #1e1e1e;
+    --panel-color: #2d2d2d;
+    --accent-color: #4caf50;
+    --text-color: #e0e0e0;
+    --secondary-text: #a0a0a0;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+}
+
+header {
+    background-color: #111;
+    padding: 15px;
     text-align: center;
-    margin-top: 50px;
-    background: #f6f6f6;
-}
-
-#score {
-    font-size: 48px;
-    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     font-weight: bold;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--accent-color);
 }
 
-#click-button {
-    font-size: 24px;
-    padding: 15px 30px;
+.game-container {
+    display: flex;
+    flex: 1;
+    height: 100%;
+}
+
+.click-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #444;
+    position: relative;
+}
+
+.score-display {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.per-second {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    margin-bottom: 40px;
+}
+
+#pc-button {
+    width: 200px;
+    height: 200px;
+    background: url('https://cdn-icons-png.flaticon.com/512/96/96648.png') no-repeat center center;
+    background-size: contain;
     cursor: pointer;
-}
-
-
-.img-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.img-button img {
-    width: 150px;
     transition: transform 0.1s;
+    filter: invert(1) opacity(0.8);
 }
 
-.img-button img:active {
+#pc-button:active {
     transform: scale(0.95);
+}
+
+.click-particle {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    pointer-events: none;
+    animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
+
+/* Section Droite : Magasin */
+.upgrade-section {
+    flex: 1;
+    background-color: var(--panel-color);
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    border-bottom: 1px solid #555;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.upgrade-item {
+    background-color: #3a3a3a;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: 1px solid transparent;
+}
+
+.upgrade-item:hover {
+    background-color: #444;
+    border-color: #666;
+}
+
+.upgrade-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+
+.item-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+}
+
+.item-info p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+}
+
+.item-cost {
+    font-weight: bold;
+    color: #ffb74d;
+}
+
+.item-count {
+    background-color: #222;
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    min-width: 20px;
+    text-align: center;
 }
