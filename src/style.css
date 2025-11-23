@@ -59,7 +59,7 @@ header {
 #pc-button {
     width: 200px;
     height: 200px;
-    background: url('https://cdn-icons-png.flaticon.com/512/96/96648.png') no-repeat center center;
+    background: url('./img/VintagePc.png') no-repeat center center;
     background-size: contain;
     cursor: pointer;
     transition: transform 0.1s;
