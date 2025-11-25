@@ -3,20 +3,22 @@ let gameData = {
     clickValue: 1,
     items: [
         { id: 0, name: "Barrette de RAM 256Mo", cost: 15, bps: 0.5, count: 0, desc: "Une petite amélioration de mémoire." },
-        { id: 1, name: "Ventilateur Bruyant", cost: 100, bps: 3, count: 0, desc: "Ça souffle fort, mais ça refroidit." },
-        { id: 2, name: "Processeur Pentium", cost: 500, bps: 10, count: 0, desc: "Le roi des années 90." },
-        { id: 3, name: "Carte Graphique Voodoo", cost: 2000, bps: 40, count: 0, desc: "Pour faire tourner Quake en 30bps." },
-        { id: 4, name: "Connexion ADSL", cost: 7500, bps: 100, count: 0, desc: "Adieu le bruit du modem 56k." },
-        { id: 5, name: "Serveur Linux", cost: 25000, bps: 300, count: 0, desc: "La stabilité avant tout." },
+        { id: 1, name: "Ventilateur bruyant", cost: 100, bps: 3, count: 0, desc: "Ça souffle fort mais ça refroidit." },
+        { id: 2, name: "Nouveau processeur", cost: 500, bps: 10, count: 0, desc: "Il était temps de changer" },
+        { id: 3, name: "Carte Graphique RTX 7080", cost: 2000, bps: 40, count: 0, desc: "Pour faire tourner gta 6" },
+        { id: 4, name: "La fibre", cost: 7500, bps: 100, count: 0, desc: "J'avoue même moi j'en rêve" },
+        { id: 5, name: "Serveur Linux", cost: 25000, bps: 300, count: 0, desc: "Meilleur que windows?" },
         { id: 6, name: "Mineur de Bitcoin", cost: 100000, bps: 1200, count: 0, desc: "Ça chauffe énormément." },
-        { id: 7, name: "Supercalculateur", cost: 1000000, bps: 5000, count: 0, desc: "Calcule la réponse à la Grande Question." },
-        { id: 8, name: "Esprit de Steve Jobs", cost: 10000000, bps: 25000, count: 0, desc: "Une vision, un design, une révolution." }
+        { id: 7, name: "Water-cooling", cost: 1000000, bps: 5000, count: 0, desc: "Encore plus de refroidissement!" },
+        { id: 8, name: "Esprit de Steve Jobs", cost: 10000000, bps: 25000, count: 0, desc: "Le saint-graal" }
     ]
 };
 
 function formatNumber(num) {
-    if (num >= 1000000) return (num / 1000000).toFixed(2) + ' Mb';
-    if (num >= 1000) return (num / 1000).toFixed(1) + ' Kb';
+    if (num >= 1000000000000) return (num / 1000000000000).toFixed(3) + ' Tb';
+    if (num >= 1000000000) return (num / 1000000000).toFixed(3) + ' Gb';
+    if (num >= 1000000) return (num / 1000000).toFixed(3) + ' Mb';
+    if (num >= 1000) return (num / 1000).toFixed(3) + ' Kb';
     return Math.floor(num);
 }
 
@@ -61,10 +63,11 @@ function buyItem(index) {
     }
 }
 
+
 function updateUI() {
     document.getElementById('score').innerText = formatNumber(gameData.score);
     document.getElementById('bps').innerText = formatNumber(bitsPerSecond());
-    
+
     gameData.items.forEach((item, index) => {
         const btn = document.getElementById(`btn-item-${index}`);
         if (btn) {
