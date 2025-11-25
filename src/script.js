@@ -2,7 +2,7 @@ let gameData = {
     score: 0,
     clickValue: 1,
     items: [
-        { id: 0, name: "Barrette de RAM 256Mo", cost: 15, bps: 0.5, count: 0, desc: "Une petite amélioration de mémoire." },
+        { id: 0, name: "Barrette de RAM 256Mo", cost: 15, bps: 1, count: 0, desc: "Une petite amélioration de mémoire." },
         { id: 1, name: "Ventilateur bruyant", cost: 100, bps: 3, count: 0, desc: "Ça souffle fort mais ça refroidit." },
         { id: 2, name: "Nouveau processeur", cost: 500, bps: 10, count: 0, desc: "Il était temps de changer" },
         { id: 3, name: "Carte Graphique RTX 7080", cost: 2000, bps: 40, count: 0, desc: "Pour faire tourner gta 6" },
