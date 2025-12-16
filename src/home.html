@@ -1,24 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>A clicker game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ ClickBIT</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="game-container">
-    <div class="click-section">
-        <div class="score-display"><span id="score">0</span> BITS</div>
-        <div class="per-second">Score: <span id="bps">0</span> BITS/sec</div>
+<div class="crt-overlay"></div>
+<div class="scanline"></div>
 
-        <div id="pc-button" onclick="clickPC(event)"></div>
+<div class="game-wrapper">
 
-    </div>
+    <section class="panel system-panel">
+        <h1 class="glitch-text">ClickBIT</h1>
 
-    <div class="upgrade-section">
-        <div class="section-title">Améliorations & Production passive</div>
+        <div class="display-container">
+            <div class="score-area">
+                <span id="score">0</span> <span class="unit">BITS</span>
+            </div>
+            <div class="stats-area">
+                <div class="stat-row">
+                    <span>FLUX:</span> <span id="bps" class="highlight">0</span> /s
+                </div>
+                <div class="stat-row">
+                    <span>TEMP:</span> <span id="temp-display">40.0°C</span>
+                </div>
+                <div class="temp-bar-container">
+                    <div id="temp-bar-fill"></div>
+                </div>
+            </div>
+        </div>
 
-        <div id="upgrades-container"></div>
+        <div class="click-zone">
+            <div id="main-cpu" onclick="clickCore(event)"></div>
+        </div>
+
+        <div class="cooling-mini-section">
+            <div class="mini-fan-wrapper" onclick="spinFan()">
+                <div id="fan-blade">☢️</div>
+            </div>
+            <div class="mini-fan-stats">
+                <span>REFROIDISSEMENT MANUEL</span>
+                <span id="fan-rpm" class="highlight">0</span> RPM
+            </div>
+        </div>
+
+        <div class="terminal">
+            <div class="terminal-header">> SYSTEM_LOGS</div>
+            <ul id="log-list">
+                <li>> System layout optimized.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="panel shop-panel">
+        <h2 class="section-title">/// UPGRADES ///</h2>
+
+        <div class="shop-category">
+            <h3>> LOGICIELS (Clic)</h3>
+            <div id="shop-software"></div>
+        </div>
+
+        <div class="shop-category">
+            <h3>> MATÉRIEL (Auto)</h3>
+            <div id="shop-hardware"></div>
+        </div>
+    </section>
+</div>
+
+<div id="bsod">
+    <div class="bsod-content">
+        <h1>:(</h1>
+        <p>SYSTEM FAILURE</p>
+        <p>Error: SECURITY_BREACH_DETECTED</p>
+        <p>Data corrupted: -30%</p>
+
+        <div class="captcha-container">
+            <p>VERIFY ADMIN ACCESS TO REBOOT:</p>
+            <div id="captcha-code">A7X9</div>
+
+            <input type="text" id="captcha-input" placeholder="ENTER CODE" maxlength="6" autocomplete="off">
+            <button onclick="checkCaptcha()">UNLOCK SYSTEM</button>
+        </div>
     </div>
 </div>
 
