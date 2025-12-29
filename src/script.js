@@ -1,14 +1,11 @@
-/* --- CONFIGURATION --- */
 let gameData = {
     score: 0,
 
-    // Température
     cpuTemp: 40,
     minTemp: 40,
     maxTemp: 100,
     fanRPM: 0,
 
-    // MATÉRIEL (Production Passive - BPS)
     hardwareItems: [
         { id: 0, name: "RAM Stick", cost: 15, val: 0.5, count: 0, desc: "Mémoire de base" },
         { id: 1, name: "GPU Voodoo", cost: 150, val: 5, count: 0, desc: "Accélération 3D" },
@@ -17,7 +14,6 @@ let gameData = {
         { id: 4, name: "Supercalculateur", cost: 50000, val: 500, count: 0, desc: "Puissance pure" }
     ],
 
-    // LOGICIELS (Amélioration Clic - BPC)
     softwareItems: [
         { id: 0, name: "Souris Optique", cost: 50, val: 1, count: 0, desc: "+1/clic" },
         { id: 1, name: "Double Clic", cost: 400, val: 5, count: 0, desc: "+5/clic" },
@@ -26,7 +22,6 @@ let gameData = {
     ]
 };
 
-/* --- UTILITAIRES --- */
 function formatNumber(num) {
     if (num >= 1e6) return (num / 1e6).toFixed(2) + ' MB';
     if (num >= 1e3) return (num / 1e3).toFixed(1) + ' KB';
@@ -41,7 +36,6 @@ function log(msg) {
     if (list.children.length > 8) list.lastChild.remove();
 }
 
-/* --- MOTEUR DE JEU --- */
 function getBPS() {
     let bps = 0;
     gameData.hardwareItems.forEach(i => bps += i.count * i.val);
@@ -54,8 +48,6 @@ function getClickPower() {
     return power;
 }
 
-/* --- INTERACTIONS --- */
-
 function clickCore(e) {
     if (gameData.cpuTemp >= gameData.maxTemp) return; // Bloqué si trop chaud
 
@@ -63,7 +55,6 @@ function clickCore(e) {
     gameData.score += val;
     gameData.cpuTemp += 0.2; // Chauffe un peu au clic
 
-    // Animation du texte flottant
     createParticle(e.clientX, e.clientY, `+${formatNumber(val)}`);
     updateUI();
 }
@@ -72,7 +63,6 @@ function createParticle(x, y, text) {
     const el = document.createElement('div');
     el.className = 'click-particle';
     el.innerText = text;
-    // Petit décalage aléatoire
     const offsetX = (Math.random() - 0.5) * 40;
     el.style.left = (x + offsetX) + 'px';
     el.style.top = (y - 20) + 'px';
@@ -100,7 +90,6 @@ function buy(category, index) {
     }
 }
 
-/* --- EVENTS ALÉATOIRES --- */
 function spawnEvent() {
     // 20% de chance toutes les 5 secondes
     if (Math.random() > 0.8) {
@@ -143,31 +132,22 @@ function spawnEvent() {
     }
 }
 
-/* --- AJOUTS DE VARIABLES --- */
 let currentCaptcha = "";
-
-/* ... (fonctions utilitaires, buy, etc. inchangées) ... */
-
-/* --- NOUVELLE LOGIQUE BSOD --- */
 
 function triggerBSOD() {
     const bsod = document.getElementById('bsod');
     bsod.style.display = 'flex';
 
     // Punition immédiate
-    gameData.score = Math.floor(gameData.score * 0.7); // -30%
+    gameData.score = Math.floor(gameData.score * 0.7);
     gameData.cpuTemp = 60;
     gameData.fanRPM = 0;
 
-    // Générer le Captcha
     generateCaptcha();
-
-    // NOTE : On ne met PLUS de setTimeout. Le jeu est bloqué TANT QUE
-    // le joueur n'a pas réussi le captcha.
 }
 
 function generateCaptcha() {
-    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // Pas de I, 1, O, 0 pour éviter la confusion
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     let result = "";
     for (let i = 0; i < 6; i++) {
         result += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -202,9 +182,7 @@ function checkCaptcha() {
     }
 }
 
-/* ... (Le reste du code, boucles, init, etc. inchangé) ... */
 
-/* --- BOUCLES --- */
 setInterval(() => {
     // 1. Production BPS
     const bps = getBPS();
@@ -236,7 +214,6 @@ setInterval(spawnEvent, 5000);
 // Sauvegarde 30s
 setInterval(() => localStorage.setItem('cyberFinal', JSON.stringify(gameData)), 30000);
 
-/* --- UI --- */
 let fanRotation = 0;
 function updateFanVisuals() {
     fanRotation += gameData.fanRPM / 20;
@@ -298,13 +275,12 @@ function renderShop() {
     renderList(gameData.hardwareItems, 'shop-hardware', 'hardware');
 }
 
-/* --- INIT --- */
+
 window.onload = () => {
     if(localStorage.getItem('cyberFinal')) {
         const saved = JSON.parse(localStorage.getItem('cyberFinal'));
         gameData = { ...gameData, ...saved };
 
-        // Dans window.onload ...
         const input = document.getElementById('captcha-input');
         input.addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
